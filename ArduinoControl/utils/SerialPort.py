@@ -1,5 +1,5 @@
 from ArduinoControl import Arduino,sys,os,serial,glob
-
+import subprocess as sp
 class SerialPort():
     def __init__(self):
         self.result = []
@@ -13,7 +13,12 @@ class SerialPort():
                 A list of the serial ports available on the system
         """
         if sys.platform.startswith('win'):
-            ports = ['COM%s' % (i + 1) for i in range(256)]
+            x=sp.getoutput('mode')
+            l=x.split()
+            for i in l:
+                if 'COM' in i:
+                    ports=i[:-1]
+            #ports = ['COM%s' % (i + 1) for i in range(256)]
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
             # this excludes your current terminal "/dev/tty"
             ports = ["/dev/"+os.popen("dmesg | egrep ttyACM | cut -f3 -d: | tail -n1").read().strip()]
