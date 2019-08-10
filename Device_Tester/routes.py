@@ -2,9 +2,9 @@ from flask import render_template, request
 from Device_Tester import app
 
 @app.route('/')
-@app.route('/test')
-def test():
-    return render_template("test.html")
+@app.route('/testArduino')
+def testArduino():
+    return render_template("testArduino.html")
 
 # Read for understanding the return type of request.form: https://werkzeug.palletsprojects.com/en/0.15.x/datastructures/
 @app.route('/upload', methods=['POST'])
